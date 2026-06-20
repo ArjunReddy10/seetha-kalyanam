@@ -12,26 +12,28 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+const BASE = "/seetha-kalyanam";
+
 const products = [
-  { name: "Appala Gampalu", image: "/products/appala-gampalu.png", price: "₹1,800", pieces: "6 Pieces", each: "₹300 each" },
-  { name: "Designer Bondam", image: "/products/designer-bondam.png", price: "₹1,800", pieces: "1 Piece", each: "Customizable" },
-  { name: "Ganesh Kobbari Bondam", image: "/products/ganesh-kobbari-bondam.png", price: "₹1,800", pieces: "1 Piece", each: "Customizable" },
-  { name: "Garagabuddi", image: "/products/garagabuddi.png", price: "₹600", pieces: "1 Piece", each: "Customizable" },
-  { name: "Irani Kundalu", image: "/products/irani-kundalu.png", price: "₹800", pieces: "2 Pieces", each: "₹400 each" },
-  { name: "Kobbari Bondam", image: "/products/kobbari-bondam.png", price: "₹1,800", pieces: "1 Piece", each: "Customizable" },
-  { name: "Kuradi Kundalu", image: "/products/kuradi-kundalu.png", price: "₹1,500", pieces: "5 Pieces", each: "₹300 each" },
-  { name: "Designer Kuradi Kundalu", image: "/products/muradu-kundalu.png", price: "₹1,500", pieces: "5 Pieces", each: "₹300 each" },
-  { name: "Pesthe Kudukalu", image: "/products/pesthe-kudukalu.png", price: "₹400", pieces: "2 Pieces", each: "₹200 each" },
-  { name: "Saana", image: "/products/saana.png", price: "₹500", pieces: "1 Piece", each: "Customizable" },
-  { name: "Sharapetta", image: "/products/sharapetta.png", price: "₹1,800", pieces: "1 Piece", each: "Customizable" },
+  { name: "Appala Gampalu", image: `${BASE}/products/appala-gampalu.png`, price: "₹1,800", pieces: "6 Pieces", each: "₹300 each" },
+  { name: "Designer Bondam", image: `${BASE}/products/designer-bondam.png`, price: "₹1,800", pieces: "1 Piece", each: "Customizable" },
+  { name: "Ganesh Kobbari Bondam", image: `${BASE}/products/ganesh-kobbari-bondam.png`, price: "₹1,800", pieces: "1 Piece", each: "Customizable" },
+  { name: "Garagabuddi", image: `${BASE}/products/garagabuddi.png`, price: "₹600", pieces: "1 Piece", each: "Customizable" },
+  { name: "Irani Kundalu", image: `${BASE}/products/irani-kundalu.png`, price: "₹800", pieces: "2 Pieces", each: "₹400 each" },
+  { name: "Kobbari Bondam", image: `${BASE}/products/kobbari-bondam.png`, price: "₹1,800", pieces: "1 Piece", each: "Customizable" },
+  { name: "Kuradi Kundalu", image: `${BASE}/products/kuradi-kundalu.png`, price: "₹1,500", pieces: "5 Pieces", each: "₹300 each" },
+  { name: "Designer Kuradi Kundalu", image: `${BASE}/products/muradu-kundalu.png`, price: "₹1,500", pieces: "5 Pieces", each: "₹300 each" },
+  { name: "Pesthe Kudukalu", image: `${BASE}/products/pesthe-kudukalu.png`, price: "₹400", pieces: "2 Pieces", each: "₹200 each" },
+  { name: "Saana", image: `${BASE}/products/saana.png`, price: "₹500", pieces: "1 Piece", each: "Customizable" },
+  { name: "Sharapetta", image: `${BASE}/products/sharapetta.png`, price: "₹1,800", pieces: "1 Piece", each: "Customizable" },
 ];
 
 const galleryImages = [
-  "/gallery/1.JPG", "/gallery/2.JPG", "/gallery/3.JPG", "/gallery/4.JPG",
-  "/gallery/5.JPG", "/gallery/6.JPG", "/gallery/7.JPG", "/gallery/8.JPG",
-  "/gallery/9.JPG", "/gallery/10.JPG", "/gallery/11.JPG", "/gallery/12.JPG",
-  "/gallery/13.JPG", "/gallery/14.JPG", "/gallery/15.JPG", "/gallery/16.JPG",
-  "/gallery/17.JPG", "/gallery/18.JPG",
+  `${BASE}/gallery/1.JPG`, `${BASE}/gallery/2.JPG`, `${BASE}/gallery/3.JPG`, `${BASE}/gallery/4.JPG`,
+  `${BASE}/gallery/5.JPG`, `${BASE}/gallery/6.JPG`, `${BASE}/gallery/7.JPG`, `${BASE}/gallery/8.JPG`,
+  `${BASE}/gallery/9.JPG`, `${BASE}/gallery/10.JPG`, `${BASE}/gallery/11.JPG`, `${BASE}/gallery/12.JPG`,
+  `${BASE}/gallery/13.JPG`, `${BASE}/gallery/14.JPG`, `${BASE}/gallery/15.JPG`, `${BASE}/gallery/16.JPG`,
+  `${BASE}/gallery/17.JPG`, `${BASE}/gallery/18.JPG`,
 ];
 
 const fadeUp = {
@@ -42,24 +44,10 @@ const fadeUp = {
 function VideoBg({ src, dark = false }: { src: string; dark?: boolean }) {
   return (
     <>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 h-full w-full object-cover"
-      >
+      <video autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover">
         <source src={src} type="video/mp4" />
       </video>
-
-      <div
-        className={`absolute inset-0 ${
-          dark
-            ? "bg-black/62"
-            : "bg-gradient-to-b from-black/30 via-[#2B1008]/35 to-[#080301]/90"
-        }`}
-      />
+      <div className={`absolute inset-0 ${dark ? "bg-black/62" : "bg-gradient-to-b from-black/30 via-[#2B1008]/35 to-[#080301]/90"}`} />
     </>
   );
 }
@@ -70,25 +58,15 @@ export default function Home() {
   const [musicOn, setMusicOn] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  const ammaWhatsApp =
-    "https://wa.me/919059062567?text=Namaste%20Seetha%20Kalyanam%20🙏%20I%20am%20interested%20in%20your%20handmade%20wedding%20products.%20Please%20share%20details.";
-
-  const athayaWhatsApp =
-    "https://wa.me/919177187333?text=Namaste%20Seetha%20Kalyanam%20🙏%20I%20am%20interested%20in%20customized%20wedding%20creations.%20Please%20share%20details.";
-
-  const emailLink =
-    "mailto:seethakalyanam03@gmail.com?subject=Seetha%20Kalyanam%20Order%20Enquiry";
+  const ammaWhatsApp = "https://wa.me/919059062567?text=Namaste%20Seetha%20Kalyanam%20🙏%20I%20am%20interested%20in%20your%20handmade%20wedding%20products.%20Please%20share%20details.";
+  const athayaWhatsApp = "https://wa.me/919177187333?text=Namaste%20Seetha%20Kalyanam%20🙏%20I%20am%20interested%20in%20customized%20wedding%20creations.%20Please%20share%20details.";
+  const emailLink = "mailto:seethakalyanam03@gmail.com?subject=Seetha%20Kalyanam%20Order%20Enquiry";
 
   useEffect(() => {
     const startMusic = () => {
       if (!audioRef.current) return;
-
       audioRef.current.volume = 0.1;
-      audioRef.current
-        .play()
-        .then(() => setMusicOn(true))
-        .catch(() => {});
-
+      audioRef.current.play().then(() => setMusicOn(true)).catch(() => {});
       window.removeEventListener("click", startMusic);
       window.removeEventListener("touchstart", startMusic);
     };
@@ -117,13 +95,11 @@ export default function Home() {
 
   return (
     <main className="bg-[#080301] text-[#2B160D]">
-      <audio ref={audioRef} src="/audio/ramayana-theme.mp3" loop preload="auto" />
+      <audio ref={audioRef} src={`${BASE}/audio/ramayana-theme.mp3`} loop preload="auto" />
 
       <nav className="fixed left-0 top-0 z-50 w-full px-3 py-4 md:px-5 md:py-5">
         <div className="liquid-glass mx-auto flex max-w-7xl items-center justify-between rounded-full px-4 py-3 md:px-6">
-          <a href="#home" className="font-serif text-lg font-bold text-white md:text-xl">
-            Seetha Kalyanam
-          </a>
+          <a href="#home" className="font-serif text-lg font-bold text-white md:text-xl">Seetha Kalyanam</a>
 
           <div className="hidden gap-7 text-sm font-medium text-white/85 md:flex">
             <a href="#products">Products</a>
@@ -140,7 +116,7 @@ export default function Home() {
       </nav>
 
       <section id="home" className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-5 text-center md:px-6">
-        <VideoBg src="/videos/rama-seetha-hero.mp4" />
+        <VideoBg src={`${BASE}/videos/rama-seetha-hero.mp4`} />
         <div className="video-soft-overlay" />
         <div className="section-fade-bottom" />
 
@@ -176,7 +152,7 @@ export default function Home() {
       </section>
 
       <section id="products" className="relative overflow-hidden px-5 py-24 md:px-6 md:py-32">
-        <VideoBg src="/videos/ayodhya-dharbar.mp4" />
+        <VideoBg src={`${BASE}/videos/ayodhya-dharbar.mp4`} />
         <div className="video-soft-overlay" />
         <div className="section-fade-top" />
         <div className="section-fade-bottom" />
@@ -208,12 +184,7 @@ export default function Home() {
                 className="liquid-card group overflow-hidden rounded-[28px] p-3 text-left md:rounded-[32px] md:p-4"
               >
                 <div className="h-56 overflow-hidden rounded-[22px] bg-[#fff4db] md:h-64 md:rounded-[24px]">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
+                  <img src={product.image} alt={product.name} loading="lazy" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
                 </div>
 
                 <div className="p-3 pt-5">
@@ -266,12 +237,7 @@ export default function Home() {
                 onClick={() => setSelectedGallery(img)}
                 className="liquid-card mb-5 block w-full overflow-hidden rounded-[28px] p-2 transition hover:scale-[1.01] md:mb-6 md:rounded-[32px] md:p-3"
               >
-                <img
-                  src={img}
-                  alt="Seetha Kalyanam real handmade creation"
-                  loading="lazy"
-                  className="w-full rounded-[22px] object-cover transition duration-700 hover:scale-105 md:rounded-[24px]"
-                />
+                <img src={img} alt="Seetha Kalyanam real handmade creation" loading="lazy" className="w-full rounded-[22px] object-cover transition duration-700 hover:scale-105 md:rounded-[24px]" />
               </motion.button>
             ))}
           </div>
@@ -279,7 +245,7 @@ export default function Home() {
       </section>
 
       <section id="story" className="relative overflow-hidden px-5 py-24 md:px-6 md:py-32">
-        <VideoBg src="/videos/family-heritage.mp4" />
+        <VideoBg src={`${BASE}/videos/family-heritage.mp4`} />
         <div className="video-soft-overlay" />
         <div className="section-fade-top" />
         <div className="section-fade-bottom" />
@@ -307,7 +273,7 @@ export default function Home() {
           <div className="grid gap-5 sm:grid-cols-2 md:gap-6">
             <motion.div className="liquid-card rounded-[28px] p-4 md:rounded-[32px] md:p-5">
               <div className="h-80 overflow-hidden rounded-[22px] md:h-96 md:rounded-[24px]">
-                <img src="/founders/amma.png" alt="Amma" loading="lazy" className="h-full w-full object-cover object-center" />
+                <img src={`${BASE}/founders/amma.png`} alt="Amma" loading="lazy" className="h-full w-full object-cover object-center" />
               </div>
               <h3 className="mt-5 text-2xl font-bold text-white">Amma</h3>
               <p className="text-white/70">Founder & Handmade Artist</p>
@@ -315,7 +281,7 @@ export default function Home() {
 
             <motion.div className="liquid-card rounded-[28px] p-4 md:rounded-[32px] md:p-5">
               <div className="h-80 overflow-hidden rounded-[22px] md:h-96 md:rounded-[24px]">
-                <img src="/founders/athaya.png" alt="Athaya" loading="lazy" className="h-full w-full object-cover object-center" />
+                <img src={`${BASE}/founders/athaya.png`} alt="Athaya" loading="lazy" className="h-full w-full object-cover object-center" />
               </div>
               <h3 className="mt-5 text-2xl font-bold text-white">Athaya</h3>
               <p className="text-white/70">Co-Founder & Creative Artisan</p>
@@ -325,7 +291,7 @@ export default function Home() {
       </section>
 
       <section id="blessings" className="relative flex min-h-[100svh] items-center overflow-hidden px-5 py-24 md:px-6 md:py-32">
-        <VideoBg src="/videos/hanuman-devotion.mp4" dark />
+        <VideoBg src={`${BASE}/videos/hanuman-devotion.mp4`} dark />
         <div className="video-soft-overlay" />
         <div className="section-fade-top" />
 
