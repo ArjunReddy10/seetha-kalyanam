@@ -2,11 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
+
+  basePath: "/seetha-kalyanam",
+
+  assetPrefix: "/seetha-kalyanam/",
+
   images: {
     unoptimized: true,
   },
-  basePath: "/seetha-kalyanam",
-  assetPrefix: "/seetha-kalyanam/",
+
+  trailingSlash: true,
 };
 
 export default nextConfig;
